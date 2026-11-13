@@ -1,28 +1,19 @@
+
 pipeline {
     agent any
 
-    triggers {
-        pollSCM('H/2 * * * *')
-    }
-
     stages {
-
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
 
         stage('Compile') {
             steps {
-                bat 'python -m py_compile app.py test_app.py'
+                bat '"C:\\Users\\linga\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" -m py_compile app.py test_app.py'
             }
         }
 
         stage('Testing') {
             steps {
-                bat 'python -m pip install pytest'
-                bat 'python -m pytest -v'
+                bat '"C:\\Users\\linga\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" -m pip install pytest'
+                bat '"C:\\Users\\linga\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" -m pytest -v'
             }
         }
 
@@ -39,7 +30,6 @@ pipeline {
         success {
             echo 'CI/CD Pipeline Successful!'
         }
-
         failure {
             echo 'CI/CD Pipeline Failed!'
         }
